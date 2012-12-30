@@ -8,10 +8,10 @@
  * Inheriting from this class gives you a static method getAll()
  * that returns a set with all the current instances of the class.
  */
-template <typename T> class SelfRegister {
-
+template <typename T>
+class SelfRegister {
 public:
-    SelfRegister()
+	SelfRegister()
 	{ 
 		_getAll().insert((T)this); 
 	}
@@ -23,16 +23,16 @@ public:
 	{
 		_getAll().insert((T)this); 
 	}
-    ~SelfRegister()
+	~SelfRegister()
 	{
 		assert( _getAll().find((T)this) != _getAll().end() );
 		_getAll().erase((T)this);
 	}
-    static const std::set<T>& getAll()
+	static const std::set<T>& getAll()
 	{
 		return _getAll();
 	}
-    static void destroyAll() { 
+	static void destroyAll() { 
 		for(typename std::set<T>::iterator i=_getAll().begin();
 			i!=_getAll().end();
 			i=_getAll().begin())
@@ -40,13 +40,12 @@ public:
 			delete *i;
 		}
 	}
-
 private:
-    static std::set<T>& _getAll()
+	static std::set<T>& _getAll()
 	{
-        static std::set<T> instancies;
-        return instancies;
-    }
+		static std::set<T> instancies;
+		return instancies;
+	}
 
 };
 
